@@ -6,7 +6,7 @@
 </p>
 <p align="center">
 </p>
-Comparison among the MAE [22], SimMIM [48] and our FastMIM framework. MAE randomly masks and discards the input patches. Although there is only small amount of encoder patches, MAE can only be used to pre-train the isotropic ViT which generates single-scale intermediate features. SimMIM preserves input resolution and can serve as a generic framework for all kinds of vision backbones, but it needs to tackle with large amount of patches. Our FastMIM simply reduces the input resolution and replaces the pixel target with HOG target. These modifications are simple yet effective. FastMIM (i) pre-train faster; (ii) has a lighter memory consumption; (iii) can serve as a generic framework for all kinds of architectures; and (iv) achieves comparable and even better performances compared to previous methods.
+Comparison among the MAE, SimMIM and our FastMIM framework. MAE randomly masks and discards the input patches. Although there is only small amount of encoder patches, MAE can only be used to pre-train the isotropic ViT which generates single-scale intermediate features. SimMIM preserves input resolution and can serve as a generic framework for all kinds of vision backbones, but it needs to tackle with large amount of patches. Our FastMIM simply reduces the input resolution and replaces the pixel target with HOG target. These modifications are simple yet effective. FastMIM (i) pre-train faster; (ii) has a lighter memory consumption; (iii) can serve as a generic framework for all kinds of architectures; and (iv) achieves comparable and even better performances compared to previous methods.
 
 
 #### Set up
