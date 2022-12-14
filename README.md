@@ -1,4 +1,13 @@
-## Implementation of  "FastMIM: Expediting Masked Image Modeling Pre-training for Vision"
+## Implementation of  "[FastMIM: Expediting Masked Image Modeling Pre-training for Vision](https://arxiv.org/pdf/2212.06593.pdf)".
+
+
+<p align="center">
+  <img src="figs/fastmim.png" >
+</p>
+<p align="center">
+</p>
+###### Comparison among the MAE [22], SimMIM [48] and our FastMIM framework. MAE randomly masks and discards the input patches. Although there is only small amount of encoder patches, MAE can only be used to pre-train the isotropic ViT which generates single-scale intermediate features. SimMIM preserves input resolution and can serve as a generic framework for all kinds of vision backbones, but it needs to tackle with large amount of patches. Our FastMIM simply reduces the input resolution and replaces the pixel target with HOG target. These modifications are simple yet effective. FastMIM (i) pre-train faster; (ii) has a lighter memory consumption; (iii) can serve as a generic framework for all kinds of architectures; and (iv) achieves comparable and even better performances compared to previous methods.
+
 
 #### Set up
 ```
@@ -62,12 +71,34 @@ We build our object detection and sementic segmentation codebase upon mmdet-v2.2
 
 Result an ckpt will be updated when I recover from the covid-19. :(
 
-#### Classification on ImageNet-1K (ViT-B/Swin-B/PVTv2-b2/CMT-Sl)
+
+#### Classification on ImageNet-1K (ViT-B/Swin-B/PVTv2-b2/CMT-S)
+
+| Model | #Params | PT Res. | PT Epoch | PT log/ckpt | FT Res. | FT log/ckpt | Top-1 (%) |
+| :------- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| ViT-B | 86M | 128x128 | 800 | [log](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-cls/fastmim_vit_base_hog_800e_pretrain.txt)/[ckpt](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-cls/vit_base_fastmim_hog_800e_pretrain.pth) | 224x224 | [log](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-cls/fastmim_vit_base_hog_800e_finetune_100e.txt)/[ckpt](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-cls/vit_base_fastmim_hog_800e_finetune_100e.pth) | 83.8 |
+| Swin-B | 88M | 128x128 | 400 | [log](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-cls/fastmim_swin_base_hog_400e_pretrain.txt)/[ckpt](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-cls/swin_base_fastmim_hog_400e_pretrain.pth) | 224x224 | [log](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-cls/fastmim_swin_base_hog_400e_finetune_100e.txt)/[ckpt](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-cls/swin_base_fastmim_hog_400e_finetune_100e.pth) | 84.1 |
 
 #### Object Detection on COCO (Swin-B based Mask R-CNN)
 
+
+
 #### Semantic Segmentation on ADE20K (ViT-B based UpperNet)
 
+
+
+### Citation
+
+If you find this project useful in your research, please consider cite:
+
+```bibtex
+@article{guo2022fastmim,
+  title={FastMIM: Expediting Masked Image Modeling Pre-training for Vision},
+  author={Guo, Jianyuan and Han, Kai and Wu, Han and Tang, Yehui and Wang, Yunhe and Xu, Chang},
+  journal={arXiv preprint arXiv:2212.06593},
+  year={2022}
+}
+```
 
 
 ### Acknowledgement
@@ -77,11 +108,6 @@ The classification task in this repo is based on [MAE](https://github.com/facebo
 The object detection task in this repo is baesd on [MMDet](https://github.com/open-mmlab/mmdetection), [ViDet](https://github.com/facebookresearch/detectron2/tree/main/projects/ViTDet) and [Swin-Transformer-Object-Detection](https://github.com/SwinTransformer/Swin-Transformer-Object-Detection).
 
 The semantic segmentation task in this repo is baesd on [MMSeg](https://github.com/open-mmlab/mmsegmentation) and [BEiT](https://github.com/microsoft/unilm/tree/master/beit).
-
-### Citation
-
-If you find this project useful in your research, please consider cite:
-
 
 
 ### License

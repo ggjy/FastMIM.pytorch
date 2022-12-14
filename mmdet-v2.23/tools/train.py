@@ -20,8 +20,6 @@ from mmdet.models import build_detector
 from mmdet.utils import (collect_env, get_root_logger, setup_multi_processes,
                          update_data_root)
 
-import moxing as mox
-
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a detector')
@@ -87,8 +85,6 @@ def parse_args():
         default='none',
         help='job launcher')
     parser.add_argument('--local_rank', type=int, default=0)
-    # for cloud
-    parser.add_argument('--train_url', type=str, help='train_dir')
     args, unparsed = parser.parse_known_args()
     if 'LOCAL_RANK' not in os.environ:
         os.environ['LOCAL_RANK'] = str(args.local_rank)
@@ -222,16 +218,8 @@ def main():
         timestamp=timestamp,
         meta=meta)
 
-    time.sleep(30)
     logger.info('Finishing training.')
-    if args.train_url is not None and rank == 0:
-        mox.file.copy_parallel(args.work_dir, args.train_url)
-        remove_command = 'rm -r ' + args.work_dir
-        print('OS Command: {}'.format(remove_command))
-        os.system(remove_command)
 
 
 if __name__ == '__main__':
-    # os.system('nvidia-smi')
-    # mox.file.copy_parallel('s3://bucket-3291/guojianyuan/log/cmt-transfer-learning/pretrained-ckpt/', '/dev/shm/transfer-pretrained-ckpt/')
     main()

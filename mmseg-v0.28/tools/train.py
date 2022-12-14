@@ -20,8 +20,6 @@ from mmseg.models import build_segmentor
 from mmseg.utils import (collect_env, get_device, get_root_logger,
                          setup_multi_processes)
 
-import moxing as mox
-
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a segmentor')
@@ -93,8 +91,6 @@ def parse_args():
         '--auto-resume',
         action='store_true',
         help='resume from the latest checkpoint automatically.')
-    # for cloud
-    parser.add_argument('--train_url', type=str, help='train_dir')
     args, unparsed = parser.parse_known_args()      
 
     if 'LOCAL_RANK' not in os.environ:
@@ -243,15 +239,8 @@ def main():
         timestamp=timestamp,
         meta=meta)
 
-    time.sleep(30)
     logger.info('Finishing training.')
-    if args.train_url is not None and rank == 0:
-        mox.file.copy_parallel(args.work_dir, args.train_url)
-        remove_command = 'rm -r ' + args.work_dir
-        print('Command: {}'.format(remove_command))
-        os.system(remove_command)
 
 
 if __name__ == '__main__':
-    os.system('nvidia-smi')
     main()
