@@ -48,6 +48,12 @@ The directory structure is:
 ```
 
 #### Pre-training on ImageNet-1K
+
+To train ViT-B on ImageNet-1K on a single node with 8 gpus:
+```
+python -m torch.distributed.launch --nproc_per_node=8 main_pretrain.py --model mim_vit_base --data_path /your_path_to/data/imagenet/ --epochs 800 --warmup_epochs 20 --blr 1.5e-4 --weight_decay 0.05 --output_dir /your_path_to/fastmim_pretrain_output/ --batch_size 512 --save_ckpt_freq 100 --num_workers 10 --mask_ratio 0.75 --norm_pix_loss --rrc_scale 0.2 1.0 --input_size 128 --decoder_embed_dim 256 --decoder_depth 1 --block_size 16 --mim_loss HOG
+```
+
 To train Swin-B on ImageNet-1K on a single node with 8 gpus:
 
 ```
@@ -55,10 +61,17 @@ python -m torch.distributed.launch --nproc_per_node=8 main_pretrain.py --model m
 ```
 
 #### Finetuning on ImageNet-1K
+
+To fine-tune ViT-B on ImageNet-1K on a single node with 8 gpus:
+
+```
+python -m torch.distributed.launch --nproc_per_node=8 main_finetune.py --model vit_base_patch16 --data_path /your_path_to/data/imagenet/ --batch_size 128 --accum_iter 1 --epochs 100 --blr 6e-4 --layer_decay 0.70 --weight_decay 0.05 --drop_path 0.1 --dist_eval --finetune /your_path_to_ckpt/checkpoint-799.pth --output_dir /your_path_to/fastmim_finetune_output/
+```
+
 To fine-tune Swin-B on ImageNet-1K on a single node with 8 gpus:
 
 ```
-python -m torch.distributed.launch --nproc_per_node=1 main_finetune.py --model swin_base_patch4_window7_224 --data_path /your_path_to/data/imagenet/ --batch_size 128 --epochs 100 --blr 1.0e-3 --layer_decay 0.80 --weight_decay 0.05 --drop_path 0.1 --dist_eval --finetune /your_path_to_ckpt/checkpoint-399.pth --output_dir /your_path_to/fastmim_finetune_output/
+python -m torch.distributed.launch --nproc_per_node=8 main_finetune.py --model swin_base_patch4_window7_224 --data_path /your_path_to/data/imagenet/ --batch_size 128 --epochs 100 --blr 1.0e-3 --layer_decay 0.80 --weight_decay 0.05 --drop_path 0.1 --dist_eval --finetune /your_path_to_ckpt/checkpoint-399.pth --output_dir /your_path_to/fastmim_finetune_output/
 ```
 
 
