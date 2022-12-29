@@ -130,10 +130,6 @@ We build our object detection and sementic segmentation codebase upon mmdet-v2.2
 | UPerNet | ViT-B | [FastMIM](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-seg/vit_base_fastmim_finetune.pth) | 512x512 | 16 | 160000 | 49.5 | [config](https://github.com/ggjy/FastMIM.pytorch/blob/master/mmseg-v0.28/configs/vit/fastmim_vit_base_cfg.py) | [log](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-seg/ade20k_fastmim_vit_base.log.json)/[ckpt](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-seg/vit_base_ade20k_mIoU49.45.pth) |
 
 
-Method	Backbone	Crop Size	pretrain	pretrain img size	Batch Size	Lr schd	Mem (GB)	Inf time (fps)	mIoU	mIoU(ms+flip)	config	download
-UPerNet	ViT-B	512x512	ImageNet-1K	224x224	16	160000	9.96	7.14	48.13	48.70	config	model | log
-
-
 ### Citation
 
 If you find this project useful in your research, please consider cite:
