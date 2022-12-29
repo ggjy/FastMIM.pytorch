@@ -118,10 +118,20 @@ We build our object detection and sementic segmentation codebase upon mmdet-v2.2
 
 #### Object Detection on COCO (Swin-B based Mask R-CNN)
 
+| Model | Backbone | Pretrain | Lr schd | box AP | mask AP | Config | Checkpoint |
+| :------- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Mask R-CNN | Swin-B | SimMIM | 3x | 52.3 | 46.4 | [config](https://github.com/ggjy/FastMIM.pytorch/blob/master/mmdet-v2.23/configs/swin/simmim_mask_rcnn_upgraded_scp_swin_base_3x_coco.py) | [log](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-det/swin_base_simmim_3x.log.json)/[ckpt](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-det/swin_base_simmim_3x.pth) |
+| Mask R-CNN | Swin-B | FastMIM | 3x | 52.0 | 46.0 | [config](https://github.com/ggjy/FastMIM.pytorch/blob/master/mmdet-v2.23/configs/swin/fastmim_mask_rcnn_upgraded_scp_swin_base_3x_coco.py) | [log](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-det/swin_base_fastmim_3x.log.json)/[ckpt](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-det/swin_base_fastmim_3x.pth) |
+
+#### Semantic Segmentation on ADE20K (ViT-B based UPerNet)
+
+| Model | Backbone | Pretrain | Crop Size | Batch Size | Lr schd | mIoU(ss) | Config | Checkpoint |
+| :------- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| UPerNet | ViT-B | [FastMIM](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-seg/vit_base_fastmim_finetune.pth) | 512x512 | 16 | 160000 | 49.5 | [config](https://github.com/ggjy/FastMIM.pytorch/blob/master/mmseg-v0.28/configs/vit/fastmim_vit_base_cfg.py) | [log](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-seg/ade20k_fastmim_vit_base.log.json)/[ckpt](https://github.com/ggjy/FastMIM.pytorch/releases/download/release-seg/vit_base_ade20k_mIoU49.45.pth) |
 
 
-#### Semantic Segmentation on ADE20K (ViT-B based UpperNet)
-
+Method	Backbone	Crop Size	pretrain	pretrain img size	Batch Size	Lr schd	Mem (GB)	Inf time (fps)	mIoU	mIoU(ms+flip)	config	download
+UPerNet	ViT-B	512x512	ImageNet-1K	224x224	16	160000	9.96	7.14	48.13	48.70	config	model | log
 
 
 ### Citation
